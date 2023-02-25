@@ -4,12 +4,13 @@ import os
 import discord
 from dotenv import load_dotenv
 
-import secrets
+
 
 load_dotenv()
-TOKEN = os.getenv(secrets.botToken)
-
-client = discord.Client()
+TOKEN = os.getenv('DISCORD_TOKEN')
+intents = discord.Intents.default()
+intents.members = True
+client = discord.Client(intents=intents)
 
 
 @client.event
