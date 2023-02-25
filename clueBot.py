@@ -6,9 +6,13 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 from config import DISCORD_TOKEN
+import random
 
 bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
-
+suspect = ["Colonel Mustard", "Miss Scarlet", "Mrs. White", "Mr. Green", "Mrs. Peacock", "Professor Plum"]
+weapon = ["Candlestick", "Knife", "Lead Pipe", "Revolver", "Rope", "Wrench"]
+room = ["Kitchen", "Ballroom", "Conservatory", "Dining Room", "Billiard Room", "Library", "Lounge", "Hall", "Study"]
+deck = suspect + weapon + room
 
 @bot.event
 async def on_ready():
