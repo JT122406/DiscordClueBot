@@ -1,21 +1,28 @@
 # Clue discord bot
 
 import os
+
 import discord
-from dotenv import load_dotenv
+from discord import app_commands
+from discord.ext import commands
+from config import DISCORD_TOKEN
+
+bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 
 
-
-load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
-intents = discord.Intents.default()
-intents.members = True
-client = discord.Client(intents=intents)
-
-
-@client.event
+@bot.event
 async def on_ready():
-    print(f'{client.user} has connected to Discord!')
+    print("Bot is ready!")
+    try:
+        synced = await bot.tree.sync()
+        print(f"Synced {len(synced)} commands")
+    except Exception as e:
+        print(e)
 
 
-client.run(TOKEN)
+@bot.tree.command(name="hello")
+async def hello(interaction: discord.Interaction):
+    await interaction.response.send_message("Hello World!")
+
+
+bot.run(DISCORD_TOKEN)

@@ -1,2 +1,3 @@
-secrets.py
 .env
+.idea
+config.py
